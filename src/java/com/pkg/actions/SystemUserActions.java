@@ -14,6 +14,8 @@ import com.pkg.models.SystemUser;
 import com.pkg.services.SystemUserService;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -23,6 +25,7 @@ public class SystemUserActions extends ActionSupport implements ModelDriven<Syst
     
     private SystemUser systemuser = new SystemUser();
     private SystemUserService sus = new SystemUserService();
+    private List<SystemUser> userDetails = new ArrayList<SystemUser>();
     
     @Override
     public SystemUser getModel() {
@@ -55,8 +58,27 @@ public class SystemUserActions extends ActionSupport implements ModelDriven<Syst
     }
     
     //login() is to invoke systemuser login
-//    public String login(){
-//        
-//    }
+    public String login() throws NoSuchAlgorithmException, InvalidKeySpecException{
+       //System.out.println(systemuser.getUsername());
+       if(sus.login(systemuser.getUsername(), systemuser.getPassword())){
+           return SUCCESS;
+       }else{
+           return ERROR;
+       } 
+    }
+
+    /**
+     * @return the userDetails
+     */
+    public List<SystemUser> getUserDetails() {
+        return userDetails;
+    }
+
+    /**
+     * @param userDetails the userDetails to set
+     */
+    public void setUserDetails(List<SystemUser> userDetails) {
+        this.userDetails = userDetails;
+    }
     
 }

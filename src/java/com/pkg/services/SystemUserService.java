@@ -12,6 +12,7 @@ import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
+import java.util.List;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
@@ -100,5 +101,25 @@ public class SystemUserService {
         systemuser.setRole("student");
         return sud.registerStudent(systemuser);
     }//studentRegistration method
+    
+    //login method for system users
+    public boolean login(String username,String password) throws NoSuchAlgorithmException, InvalidKeySpecException{
+        //System.out.println(username);
+        boolean authentication = false;
+        List<SystemUser> userDetails = sud.getSystemUserDetails(username);
+        
+        if(!userDetails.isEmpty()){
+            int id = sud.getSystemUserDetails(username).get(0).getId();
+            System.out.println("not empty");
+            System.out.println(userDetails.get(0).getUsername());
+            if(validatePassword(password,userDetails.get(0).getPassword()) && (username.equals(userDetails.get(0).getUsername()))){
+                authentication = true;
+                System.out.println("auth true");
+            }else{
+                authentication = false;
+            }
+        }        
+        return authentication;      
+    }
     
 }

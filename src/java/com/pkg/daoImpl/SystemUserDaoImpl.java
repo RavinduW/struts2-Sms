@@ -108,12 +108,75 @@ public class SystemUserDaoImpl implements SystemUserDao {
                 }catch(Exception e){
                     System.out.println(e);
                 }
-            } 
+            }
+            
+            if(rs != null){
+                try{
+                    rs.close();
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+            }
         }
         
         return success;
     }//loginSystemUser method
     
-    
+    @Override
+    public List<SystemUser> getSystemUserDetails(String username){
+       query = "SELECT * FROM system_user WHERE username=?";
+       List <SystemUser> userdetails = new ArrayList<>();
+      //System.out.println("username =>"+username);
+       try{
+            currentConnection = ConnectionManager.getConnection();
+            ps = currentConnection.prepareStatement(query);
+            ps.setString(1, username);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+               SystemUser su = new SystemUser();
+               //set the values in setters
+               su.setId(rs.getInt(1));
+               su.setUsername(rs.getString(2));
+               su.setPassword(rs.getString(3));
+               su.setRole(rs.getString(4));
+               su.setFirstName(rs.getString(5));
+               su.setLastName(rs.getString(6));
+               su.setEmail(rs.getString(7));
+               
+               userdetails.add(su); 
+               System.out.println("fullname =>"+userdetails.get(0).getFirstName());
+           }
+           //System.out.println("fullname =>"+userdetails.get(0).getFirstName());
+       }catch(Exception e){
+           System.out.println(e);
+       }finally{
+            
+           if(currentConnection != null){
+                try{
+                    currentConnection.close();
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+            }
+            
+            if(ps != null){
+                try{
+                    ps.close();
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+            }
+            
+            if(rs != null){
+                try{
+                    rs.close();
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+            }
+       }
+       return userdetails;
+    }
     
 }
