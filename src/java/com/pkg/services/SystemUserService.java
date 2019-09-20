@@ -109,12 +109,12 @@ public class SystemUserService {
         List<SystemUser> userDetails = sud.getSystemUserDetails(username);
         
         if(!userDetails.isEmpty()){
-            int id = sud.getSystemUserDetails(username).get(0).getId();
-            System.out.println("not empty");
+            //int id = sud.getSystemUserDetails(username).get(0).getId();
+            //System.out.println("not empty");
             System.out.println(userDetails.get(0).getUsername());
             if(validatePassword(password,userDetails.get(0).getPassword()) && (username.equals(userDetails.get(0).getUsername()))){
                 authentication = true;
-                System.out.println("auth true");
+                //System.out.println("auth true");
             }else{
                 authentication = false;
             }

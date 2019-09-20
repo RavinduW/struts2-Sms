@@ -145,7 +145,7 @@ public class SystemUserDaoImpl implements SystemUserDao {
                su.setEmail(rs.getString(7));
                
                userdetails.add(su); 
-               System.out.println("fullname =>"+userdetails.get(0).getFirstName());
+               //System.out.println("fullname =>"+userdetails.get(0).getFirstName());
            }
            //System.out.println("fullname =>"+userdetails.get(0).getFirstName());
        }catch(Exception e){
