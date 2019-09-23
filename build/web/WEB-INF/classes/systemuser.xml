@@ -6,14 +6,27 @@
     <!-- Configuration for the default package. -->
     <package name="systemuser" extends="struts-default">
         
+        <interceptors>
+    <interceptor name="UserRoleInterceptor" class="com.pkg.interceptors.UserRoleInterceptor"/>
+    <interceptor-stack name="defaultStack">
+        <interceptor-ref name="params"/>
+        <interceptor-ref name="UserRoleInterceptor" />                
+    </interceptor-stack>
+</interceptors>
+        
         <action name="save" method="save" class="com.pkg.actions.SystemUserActions">
-            <result name="success">/success.jsp</result>
-            <result name="error">/error.jsp</result>
+                        <interceptor-ref name="params"/>
+            <interceptor-ref name="UserRoleInterceptor">
+                <param name="allowedRoles">admin</param>
+            </interceptor-ref>
+            <result name="success">/index.jsp</result>
+            <result name="error">/newjsp.jsp</result>
         </action> 
         
         <action name="login" method="login" class="com.pkg.actions.SystemUserActions">
+
             <result name="success">/success.jsp</result>
-            <result name="error">/error.jsp</result>
+            <result name="404">/error.jsp</result>
         </action>   
                     
     </package>

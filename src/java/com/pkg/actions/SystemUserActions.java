@@ -16,6 +16,9 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.interceptor.SessionAware;
 
 /**
  *
@@ -59,11 +62,13 @@ public class SystemUserActions extends ActionSupport implements ModelDriven<Syst
     
     //login() is to invoke systemuser login
     public String login() throws NoSuchAlgorithmException, InvalidKeySpecException{
-       //System.out.println(systemuser.getUsername());
-       if(sus.login(systemuser.getUsername(), systemuser.getPassword())){
-           return SUCCESS;
+
+       System.out.println(systemuser.getUsername()+"lk");
+       if(sus.login(systemuser.getUsername(), systemuser.getPassword())){     
+           return "success";
        }else{
-           return ERROR;
+           System.out.println("hjjj");
+           return "404";
        } 
     }
 
@@ -80,5 +85,5 @@ public class SystemUserActions extends ActionSupport implements ModelDriven<Syst
     public void setUserDetails(List<SystemUser> userDetails) {
         this.userDetails = userDetails;
     }
-    
+
 }

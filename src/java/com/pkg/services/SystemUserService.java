@@ -15,6 +15,9 @@ import java.security.spec.InvalidKeySpecException;
 import java.util.List;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import org.apache.struts2.ServletActionContext;
 
 /**
  *
@@ -112,11 +115,19 @@ public class SystemUserService {
             //int id = sud.getSystemUserDetails(username).get(0).getId();
             //System.out.println("not empty");
             //System.out.println(userDetails.get(0).getUsername());
+            
             if(validatePassword(password,userDetails.get(0).getPassword()) && (username.equals(userDetails.get(0).getUsername()))){
                 authentication = true;
-                //System.out.println("auth true");
+                //HttpServletRequest request = null;
+                //HttpSession session = request.getSession();
+                //session.setAttribute("userId", sud.getSystemUserDetails(username).get(0));
+                ServletActionContext.getRequest().getSession().setAttribute("userId",(SystemUser)userDetails.get(0));
+                System.out.println(ServletActionContext.getRequest().getSession().getAttribute("userId"));
+                ServletActionContext.getRequest().getSession().setMaxInactiveInterval(30);
+                
             }else{
                 authentication = false;
+                //System.out.println("userId");
             }
         }        
         return authentication;      

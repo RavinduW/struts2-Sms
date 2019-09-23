@@ -9,5 +9,4 @@
     <include file="systemuser.xml" />
     
     <package name="default" extends="struts-default"></package>
-    
 </struts>
