@@ -12,6 +12,6 @@
         <title>Student Management System</title>
     </head>
     <body>
-        <h1>Student registration failed !</h1>
+        <h1>Error !</h1>
     </body>
 </html>

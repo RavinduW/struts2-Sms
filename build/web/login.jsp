@@ -16,10 +16,6 @@
         <h1>Welcome to Student Management System</h1>
         <br/>
         <h2>Login</h2>
-        <s:form action="login"> 
-            <s:textfield name="username" label="UserName"></s:textfield>  
-            <s:password name="password" label="Password"></s:password>
-            <s:submit value="Login"></s:submit>  
-        </s:form> 
+
     </body>
 </html>

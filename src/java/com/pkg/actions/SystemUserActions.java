@@ -24,7 +24,7 @@ import org.apache.struts2.interceptor.SessionAware;
  *
  * @author ravindu_c
  */
-public class SystemUserActions extends ActionSupport implements ModelDriven<SystemUser> {
+public class SystemUserActions extends ActionSupport implements ModelDriven<SystemUser>{
     
     private SystemUser systemuser = new SystemUser();
     private SystemUserService sus = new SystemUserService();
@@ -49,8 +49,12 @@ public class SystemUserActions extends ActionSupport implements ModelDriven<Syst
     public void setSystemuser(SystemUser systemuser) {
         this.systemuser = systemuser;
     }
-    
-    //there are 2 actions that are binded to the system user... student registration and system user login
+   
+    //home() is to return the home page of system user
+    public String home(){
+        return SUCCESS;
+    }
+   
     //save() is to invoke student registration
     public String save() throws NoSuchAlgorithmException, InvalidKeySpecException{
         if(sus.studentRegistration(systemuser)){
@@ -63,13 +67,29 @@ public class SystemUserActions extends ActionSupport implements ModelDriven<Syst
     //login() is to invoke systemuser login
     public String login() throws NoSuchAlgorithmException, InvalidKeySpecException{
 
-       System.out.println(systemuser.getUsername()+"lk");
-       if(sus.login(systemuser.getUsername(), systemuser.getPassword())){     
+       //System.out.println(systemuser.getUsername()+"lk");
+       if(sus.login(systemuser.getUsername(), systemuser.getPassword())){ 
+           //session.put("userId", systemuser.getUsername());
+           //System.out.println(systemuser.getUsername());
+           ServletActionContext.getRequest().getSession().setAttribute("userId", systemuser.getUsername());
+           //System.out.println((String)ServletActionContext.getRequest().getSession().getAttribute("userId"));
            return "success";
        }else{
-           System.out.println("hjjj");
+           //System.out.println("err");
            return "404";
        } 
+    }
+    
+    public String logOut(){
+        //session.remove("userId");
+        ServletActionContext.getRequest().getSession().invalidate();
+        return SUCCESS;
+    }
+    
+    public String loginPage(){
+        //session.remove("userId");
+        //ServletActionContext.getRequest().getSession().invalidate();
+        return SUCCESS ;
     }
 
     /**
@@ -85,5 +105,5 @@ public class SystemUserActions extends ActionSupport implements ModelDriven<Syst
     public void setUserDetails(List<SystemUser> userDetails) {
         this.userDetails = userDetails;
     }
-
+    
 }

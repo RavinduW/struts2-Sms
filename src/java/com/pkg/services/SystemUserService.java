@@ -121,9 +121,9 @@ public class SystemUserService {
                 //HttpServletRequest request = null;
                 //HttpSession session = request.getSession();
                 //session.setAttribute("userId", sud.getSystemUserDetails(username).get(0));
-                ServletActionContext.getRequest().getSession().setAttribute("userId",(SystemUser)userDetails.get(0));
-                System.out.println(ServletActionContext.getRequest().getSession().getAttribute("userId"));
-                ServletActionContext.getRequest().getSession().setMaxInactiveInterval(30);
+               // ServletActionContext.getRequest().getSession().setAttribute("userId",(SystemUser)userDetails.get(0));
+                //System.out.println(ServletActionContext.getRequest().getSession().getAttribute("userId"));
+                //ServletActionContext.getRequest().getSession().setMaxInactiveInterval(30);
                 
             }else{
                 authentication = false;

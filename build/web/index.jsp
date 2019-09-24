@@ -15,8 +15,15 @@
     <body>
         <h1>Welcome to the Student Management System !</h1>
         <br/>
-        <h2>Student Registration</h2>
+        <h2>Sign In</h2>
         <br/>
+        <s:form action="login"> 
+            <s:textfield name="username" label="UserName"></s:textfield>  
+            <s:password name="password" label="Password"></s:password>
+            <s:submit value="Login"></s:submit>  
+        </s:form> 
+        <br/>
+        <a href="<s:url action="loginPage"/>">LogIn</a>        
         <s:form action="save"> 
             <s:textfield name="username" label="UserName"></s:textfield>  
             <s:textfield name="firstName" label="First Name"></s:textfield>  
