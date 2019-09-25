@@ -8,5 +8,25 @@
     <!-- systemuser.xml file has the route action definitions which are corresponding to actions invoked by systemuser-->
     <include file="systemuser.xml" />
     
-    <package name="default" extends="struts-default"></package>
+    <package name="default" extends="struts-default">
+        
+        <!-- interceptors -->
+        <interceptors>        
+            <interceptor class="com.pkg.interceptors.SessionInterceptor" name="SessionInterceptor"></interceptor>
+                <interceptor-stack name="loginStack">
+                    <interceptor-ref name="SessionInterceptor"/>
+                    <interceptor-ref name="defaultStack"/>
+                </interceptor-stack>
+        </interceptors>
+        
+        <default-interceptor-ref name="loginStack" />
+        
+        <!-- global results -->
+        <global-results>
+            <result name="index">/index.jsp</result>
+        </global-results>
+        
+ 
+
+    </package>
 </struts>

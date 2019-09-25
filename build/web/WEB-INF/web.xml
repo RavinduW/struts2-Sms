@@ -18,29 +18,7 @@
             1
         </session-timeout>
     </session-config>
-    
-    <!-- servlet mapping for index.jsp file-->
-    <servlet>
-        <description></description>
-        <display-name>hidden</display-name>
-        <servlet-name>hidden</servlet-name>
-        <jsp-file>/WEB-INF/index.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>hidden</servlet-name>
-        <url-pattern>/hidden</url-pattern>
-    </servlet-mapping>
-        <servlet>
-        <description></description>
-        <display-name>hidden2</display-name>
-        <servlet-name>hidden2</servlet-name>
-        <jsp-file>/WEB-INF/login.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>hidden2</servlet-name>
-        <url-pattern>/hidden2</url-pattern>
-    </servlet-mapping>
-    
+      
     <!-- welocme files list -->
     <welcome-file-list>
         <welcome-file>/index.jsp</welcome-file>

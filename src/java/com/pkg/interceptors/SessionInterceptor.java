@@ -9,6 +9,8 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.Interceptor;
 import com.pkg.actions.SystemUserActions;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,6 +23,7 @@ import static org.apache.struts2.StrutsStatics.HTTP_REQUEST;
 public class SessionInterceptor implements Interceptor{
 
     private static final String USER = "userId" ;
+    //private static final String USER_ROLE = "userRole";
     
     @Override
     public void destroy() {
@@ -34,26 +37,23 @@ public class SessionInterceptor implements Interceptor{
 
     @Override
     public String intercept(ActionInvocation ai) throws Exception {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        //Map<String,Object> sessionAttributes = ai.getInvocationContext().getSession();
-        
+
         final ActionContext context = ai.getInvocationContext();
         HttpServletRequest request = (HttpServletRequest) context.get(HTTP_REQUEST);
 		HttpSession session = request.getSession(true);
 
 		// Is there a "user" object stored in the user's HttpSession
 		Object user = session.getAttribute(USER);
+                
+                //Object user_role = session.getAttribute(USER_ROLE);
         
         if(user == null){ //check if user object is exist or not in session object
             //check if the user action class is systemuseractions class 
             if (ai.getAction().getClass().equals(SystemUserActions.class)){
-		System.out.println("user null session=>"+user);
-                //return ai.invoke(); //invoke action
+                return ai.invoke();
             }
-            System.out.println("invalid session=>"+user);
-            return "login";
+            return "index";
         }else{
-                System.out.println(" valid session=>"+user);
                 return ai.invoke();
             }
         }

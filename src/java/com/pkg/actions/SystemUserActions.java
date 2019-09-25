@@ -7,18 +7,13 @@ package com.pkg.actions;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
-import com.pkg.dao.SystemUserDao;
-import com.pkg.daoImpl.SystemUserDaoImpl;
-
 import com.pkg.models.SystemUser;
 import com.pkg.services.SystemUserService;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.interceptor.SessionAware;
 
 /**
  *
@@ -50,8 +45,14 @@ public class SystemUserActions extends ActionSupport implements ModelDriven<Syst
         this.systemuser = systemuser;
     }
    
-    //home() is to return the home page of system user
-    public String home(){
+    //adminHome() is to return the home page of admin
+    public String adminHome(){
+        System.out.println("adminHome called");
+        return SUCCESS;
+    }
+    
+    //studentHome() is to return the home page of student
+    public  String studentHome(){
         return SUCCESS;
     }
    
@@ -66,32 +67,50 @@ public class SystemUserActions extends ActionSupport implements ModelDriven<Syst
     
     //login() is to invoke systemuser login
     public String login() throws NoSuchAlgorithmException, InvalidKeySpecException{
-
-       //System.out.println(systemuser.getUsername()+"lk");
-       if(sus.login(systemuser.getUsername(), systemuser.getPassword())){ 
-           //session.put("userId", systemuser.getUsername());
-           //System.out.println(systemuser.getUsername());
+         
+        String result = null;
+        if(sus.login(systemuser.getUsername(), systemuser.getPassword()).equals("studentLogin")){ 
+            
            ServletActionContext.getRequest().getSession().setAttribute("userId", systemuser.getUsername());
-           //System.out.println((String)ServletActionContext.getRequest().getSession().getAttribute("userId"));
-           return "success";
+           //ServletActionContext.getRequest().getSession().setAttribute("userRole", systemuser.getRole());
+           
+           systemuser.setUsername("");
+           
+           result = "student";
+       }else if(sus.login(systemuser.getUsername(), systemuser.getPassword()).equals("adminLogin")){
+           
+           ServletActionContext.getRequest().getSession().setAttribute("userId", systemuser.getUsername());
+           //ServletActionContext.getRequest().getSession().setAttribute("userRole", systemuser.getRole());
+           
+           systemuser.setUsername("");
+           
+           result = "admin";
+       }else if(sus.login(systemuser.getUsername(), systemuser.getPassword()).equals("teacherLogin")){
+           
+           ServletActionContext.getRequest().getSession().setAttribute("userId", systemuser.getUsername());
+           //ServletActionContext.getRequest().getSession().setAttribute("userRole", systemuser.getRole());
+           
+           systemuser.setUsername("");
+           
+           result = "teacher";
+       }else if(sus.login(systemuser.getUsername(), systemuser.getPassword()).equals("superAdminLogin")){
+           
+           ServletActionContext.getRequest().getSession().setAttribute("userId", systemuser.getUsername());
+           //ServletActionContext.getRequest().getSession().setAttribute("userRole", systemuser.getRole());
+           
+           systemuser.setUsername("");
+           result = "superAdmin";
        }else{
-           //System.out.println("err");
-           return "404";
-       } 
+           result = "404";
+       }
+        return result;
     }
     
     public String logOut(){
-        //session.remove("userId");
         ServletActionContext.getRequest().getSession().invalidate();
         return SUCCESS;
     }
     
-    public String loginPage(){
-        //session.remove("userId");
-        //ServletActionContext.getRequest().getSession().invalidate();
-        return SUCCESS ;
-    }
-
     /**
      * @return the userDetails
      */

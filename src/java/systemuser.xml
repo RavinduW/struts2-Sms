@@ -2,61 +2,25 @@
 "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 
-<struts>
+<struts> 
     <!-- Configuration for the default package. -->
-    <package name="systemuser" extends="struts-default">
-        
-<!--<interceptors>
-        <interceptor name="UserRoleInterceptor" class="com.pkg.interceptors.UserRoleInterceptor"/>
-        <interceptor-stack name="defaultStack">
-            <interceptor-ref name="params"/>
-            <interceptor-ref name="UserRoleInterceptor" />                
-        </interceptor-stack>
-    </interceptors>-->
-
-        <interceptors>
-            <interceptor class="com.pkg.interceptors.SessionInterceptor" name="SessionInterceptor"></interceptor>
-            <interceptor-stack name="loginStack">
-                <interceptor-ref name="SessionInterceptor"/>
-                <interceptor-ref name="defaultStack"/>
-            </interceptor-stack>
-        </interceptors>
-        
-        <global-results>
-            <result name="login">/login.jsp</result>
-        </global-results>
-        
-        <action name="save" method="save" class="com.pkg.actions.SystemUserActions">
-<!--        <interceptor-ref name="params"/>
-            <interceptor-ref name="UserRoleInterceptor">
-                <param name="allowedRoles">admin</param>
-            </interceptor-ref>-->
-            <result name="success">/index.jsp</result>
-            <result name="error">/newjsp.jsp</result>
+    <package name="systemuser" extends="struts-default,default">
+             
+        <action name="login" method="login" class="com.pkg.actions.SystemUserActions">
+            <result name="admin">adminPages/adminHome.jsp</result>
+            <result name="student"></result>
+            <result name="404">/error.jsp</result>
         </action> 
         
-        <action name="login" method="login" class="com.pkg.actions.SystemUserActions">
-            <result name="success" type="redirect">home.action</result>
-            <result name="404">/error.jsp</result>
-        </action>   
-        
-        <action name="loginPage" method="loginPage" class="com.pkg.actions.SystemUserActions">
-            <result name="success">/login.jsp</result>
-        </action>   
-        
-        <action name="login" method="login" class="com.pkg.actions.SystemUserActions">
-            <result name="success" type="redirect">home.action</result>
-            <result name="404">/error.jsp</result>
+        <action name="logOut" method="logOut" class="com.pkg.actions.SystemUserActions">
+            <result name="success">/index.jsp</result>
         </action>
         
-        <action name="logOut" method="logOut" class="com.pkg.actions.SystemUserActions">
-            <result name="success">/login.jsp</result>
-        </action>   
-            
-        <action name="home" method="home" class="com.pkg.actions.SystemUserActions">
-            <interceptor-ref name="loginStack" />
-            <result name="success">/success.jsp</result>
-        </action>  
-                                          
+        <action name="save" method="save" class="com.pkg.actions.SystemUserActions">
+            <result name="success">/index.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+                                     
     </package> 
+
 </struts>

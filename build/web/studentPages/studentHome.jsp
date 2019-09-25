@@ -12,6 +12,6 @@
         <title>Student Management System</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Student Home</h1>
     </body>
 </html>

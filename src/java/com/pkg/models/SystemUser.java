@@ -16,7 +16,7 @@ public class SystemUser {
     private int id;
     private String username;
     private String password;
-    private String role;
+    private int role_id;
     private String firstName;
     private String lastName;
     private String email;
@@ -63,15 +63,15 @@ public class SystemUser {
     /**
      * @return the role
      */
-    public String getRole() {
-        return role;
+    public int getRole_id() {
+        return role_id;
     }
 
     /**
      * @param role the role to set
      */
-    public void setRole(String role) {
-        this.role = role;
+    public void setRole_id(int role_id) {
+        this.role_id = role_id;
     }
 
     /**

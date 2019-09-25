@@ -5,7 +5,9 @@
  */
 package com.pkg.services;
 
+import com.pkg.dao.RoleDao;
 import com.pkg.dao.SystemUserDao;
+import com.pkg.daoImpl.RoleDaoImpl;
 import com.pkg.daoImpl.SystemUserDaoImpl;
 import com.pkg.models.SystemUser;
 import java.math.BigInteger;
@@ -27,6 +29,9 @@ public class SystemUserService {
     
     //get the SystemUserDao interface refference
     SystemUserDao sud = new SystemUserDaoImpl();
+    
+    //get the RoleDao interface reference
+    RoleDao rd = new RoleDaoImpl();
     
      //password hashing begins
     private static String generateStrongPasswordHash(String password) throws NoSuchAlgorithmException, InvalidKeySpecException
@@ -101,33 +106,29 @@ public class SystemUserService {
     public boolean studentRegistration(SystemUser systemuser) throws NoSuchAlgorithmException, InvalidKeySpecException{
         
         systemuser.setPassword(generateStrongPasswordHash(systemuser.getPassword()));
-        systemuser.setRole("student");
+        systemuser.setRole_id(rd.getRole("student"));
         return sud.registerStudent(systemuser);
     }//studentRegistration method
     
     //login method for system users
-    public boolean login(String username,String password) throws NoSuchAlgorithmException, InvalidKeySpecException{
-        //System.out.println(username);
-        boolean authentication = false;
+    public String login(String username,String password) throws NoSuchAlgorithmException, InvalidKeySpecException{
+        
+        String authentication = null;
+        
         List<SystemUser> userDetails = sud.getSystemUserDetails(username);
         
         if(!userDetails.isEmpty()){
-            //int id = sud.getSystemUserDetails(username).get(0).getId();
-            //System.out.println("not empty");
-            //System.out.println(userDetails.get(0).getUsername());
-            
-            if(validatePassword(password,userDetails.get(0).getPassword()) && (username.equals(userDetails.get(0).getUsername()))){
-                authentication = true;
-                //HttpServletRequest request = null;
-                //HttpSession session = request.getSession();
-                //session.setAttribute("userId", sud.getSystemUserDetails(username).get(0));
-               // ServletActionContext.getRequest().getSession().setAttribute("userId",(SystemUser)userDetails.get(0));
-                //System.out.println(ServletActionContext.getRequest().getSession().getAttribute("userId"));
-                //ServletActionContext.getRequest().getSession().setMaxInactiveInterval(30);
-                
+
+            if(validatePassword(password,userDetails.get(0).getPassword()) && (username.equals(userDetails.get(0).getUsername())) && rd.getRole("student")== userDetails.get(0).getId()){
+                authentication = "studentLogin";
+            }else if(validatePassword(password,userDetails.get(0).getPassword()) && (username.equals(userDetails.get(0).getUsername())) && rd.getRole("admin")== userDetails.get(0).getId()){
+                authentication = "adminLogin";
+            }else if(validatePassword(password,userDetails.get(0).getPassword()) && (username.equals(userDetails.get(0).getUsername())) && rd.getRole("teacher")== userDetails.get(0).getId()){
+                authentication = "teacherLogin";
+            }else if(validatePassword(password,userDetails.get(0).getPassword()) && (username.equals(userDetails.get(0).getUsername())) && rd.getRole("superAdmin")== userDetails.get(0).getId()){
+                authentication = "superAdminLogin";
             }else{
-                authentication = false;
-                //System.out.println("userId");
+                authentication = "failed";
             }
         }        
         return authentication;      
