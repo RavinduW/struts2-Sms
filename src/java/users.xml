@@ -1,0 +1,22 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <!-- Configuration for the default package. -->
+    
+    <package name="users" extends="struts-default,default">
+        
+        <action name="adminHome" method="adminHome" class="com.pkg.actions.SystemUserActions">
+            <result name="success">adminPages/adminHome.jsp</result>
+        </action>
+        
+        <action name="*Students" method="{1}Students" class="com.pkg.actions.SystemUserActions">
+            <result name="success">adminPages/students/{1}Students.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        
+        
+
+    </package>
+</struts>

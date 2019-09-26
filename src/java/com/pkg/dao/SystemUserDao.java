@@ -22,4 +22,8 @@ public interface SystemUserDao {
     
     //method to get a particular system user's details
     public List<SystemUser> getSystemUserDetails(String username);
+    
+    //method to get students list
+    public List<SystemUser> getStudents();
+    
 }

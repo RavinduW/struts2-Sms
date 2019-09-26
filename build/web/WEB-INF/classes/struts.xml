@@ -6,7 +6,8 @@
     <!-- Configuration for the default package. -->
     
     <!-- systemuser.xml file has the route action definitions which are corresponding to actions invoked by systemuser-->
-    <include file="systemuser.xml" />
+    <include file="login.xml" />
+    <include file="users.xml" />
     
     <package name="default" extends="struts-default">
         
@@ -25,8 +26,6 @@
         <global-results>
             <result name="index">/index.jsp</result>
         </global-results>
-        
- 
-
+         
     </package>
 </struts>

@@ -178,4 +178,60 @@ public class SystemUserDaoImpl implements SystemUserDao {
        return userdetails;
     }
     
+    public List<SystemUser> getStudents(){
+        
+       query = "SELECT * FROM system_users WHERE role_id=?";
+       List <SystemUser> students = new ArrayList<>();
+
+       try{
+            currentConnection = ConnectionManager.getConnection();
+            ps = currentConnection.prepareStatement(query);
+            ps.setInt(1, 4);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+               SystemUser su = new SystemUser();
+               //set the values in setters
+               su.setId(rs.getInt(1));
+               su.setUsername(rs.getString(2));
+               su.setPassword(rs.getString(3));
+               su.setRole_id(rs.getInt(4));
+               su.setFirstName(rs.getString(5));
+               su.setLastName(rs.getString(6));
+               su.setEmail(rs.getString(7));
+               
+               students.add(su); 
+           }
+
+       }catch(Exception e){
+           System.out.println(e);
+       }finally{
+            
+           if(currentConnection != null){
+                try{
+                    currentConnection.close();
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+            }
+            
+            if(ps != null){
+                try{
+                    ps.close();
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+            }
+            
+            if(rs != null){
+                try{
+                    rs.close();
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+            }
+       }
+       return students;
+    }
+    
 }

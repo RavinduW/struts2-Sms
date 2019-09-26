@@ -8,10 +8,7 @@ package com.pkg.interceptors;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.Interceptor;
-import com.pkg.actions.SystemUserActions;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import com.pkg.actions.LoginActions;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import static org.apache.struts2.StrutsStatics.HTTP_REQUEST;
@@ -46,10 +43,9 @@ public class SessionInterceptor implements Interceptor{
 		Object user = session.getAttribute(USER);
                 
                 //Object user_role = session.getAttribute(USER_ROLE);
-        
         if(user == null){ //check if user object is exist or not in session object
-            //check if the user action class is systemuseractions class 
-            if (ai.getAction().getClass().equals(SystemUserActions.class)){
+            //check if the user action class is loginaction class 
+            if (ai.getAction().getClass().equals(LoginActions.class)){
                 return ai.invoke();
             }
             return "index";

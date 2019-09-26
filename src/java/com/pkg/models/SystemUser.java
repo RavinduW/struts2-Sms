@@ -5,6 +5,8 @@
  */
 package com.pkg.models;
 
+import java.util.List;
+
 /**
  *
  * @author ravindu_c

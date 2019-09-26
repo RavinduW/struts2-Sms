@@ -14,6 +14,7 @@ import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -102,7 +103,7 @@ public class SystemUserService {
     
     //end of password hashing
     
-    //studnetRegistration method
+    //studentRegistration method
     public boolean studentRegistration(SystemUser systemuser) throws NoSuchAlgorithmException, InvalidKeySpecException{
         
         systemuser.setPassword(generateStrongPasswordHash(systemuser.getPassword()));
@@ -119,19 +120,35 @@ public class SystemUserService {
         
         if(!userDetails.isEmpty()){
 
-            if(validatePassword(password,userDetails.get(0).getPassword()) && (username.equals(userDetails.get(0).getUsername())) && rd.getRole("student")== userDetails.get(0).getId()){
+            if(validatePassword(password,userDetails.get(0).getPassword()) && (username.equals(userDetails.get(0).getUsername())) && rd.getRole("student")== userDetails.get(0).getRole_id()){
                 authentication = "studentLogin";
-            }else if(validatePassword(password,userDetails.get(0).getPassword()) && (username.equals(userDetails.get(0).getUsername())) && rd.getRole("admin")== userDetails.get(0).getId()){
+            }else if(validatePassword(password,userDetails.get(0).getPassword()) && (username.equals(userDetails.get(0).getUsername())) && rd.getRole("admin")== userDetails.get(0).getRole_id()){
                 authentication = "adminLogin";
-            }else if(validatePassword(password,userDetails.get(0).getPassword()) && (username.equals(userDetails.get(0).getUsername())) && rd.getRole("teacher")== userDetails.get(0).getId()){
+            }else if(validatePassword(password,userDetails.get(0).getPassword()) && (username.equals(userDetails.get(0).getUsername())) && rd.getRole("teacher")== userDetails.get(0).getRole_id()){
                 authentication = "teacherLogin";
-            }else if(validatePassword(password,userDetails.get(0).getPassword()) && (username.equals(userDetails.get(0).getUsername())) && rd.getRole("superAdmin")== userDetails.get(0).getId()){
+            }else if(validatePassword(password,userDetails.get(0).getPassword()) && (username.equals(userDetails.get(0).getUsername())) && rd.getRole("superAdmin")== userDetails.get(0).getRole_id()){
                 authentication = "superAdminLogin";
             }else{
                 authentication = "failed";
             }
         }        
         return authentication;      
+    }
+    
+    //retrieve system users who has role of student
+    public List<SystemUser> getStudentsList(){
+        return sud.getStudents();
+    }
+    
+    //retrieve partcular student data
+    public List<SystemUser> getStudent(String username){
+        
+        List<SystemUser> list = new ArrayList<SystemUser>();
+  
+        if(list.get(0).getRole_id()== rd.getRole("student")){
+            list = sud.getSystemUserDetails(username);
+        }
+        return list;
     }
     
 }

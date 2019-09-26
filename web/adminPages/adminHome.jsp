@@ -27,6 +27,6 @@
             <s:submit value="Register Student"></s:submit>  
         </s:form>
         
-        <a href="<s:url action="logOut"/>">LogOut</a>
+        <a href="<s:url action="logout"/>">LogOut</a>
     </body>
 </html>
