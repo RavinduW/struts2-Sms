@@ -3,12 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ravindu_c/Documents/NetBeansProjects/StudentManagement/src/java/systemuser.xml</file>
+            <file>file:/C:/Users/ravindu_c/Documents/NetBeansProjects/StudentManagement/web/adminPages/adminHome.jsp</file>
+            <file>file:/C:/Users/ravindu_c/Documents/NetBeansProjects/StudentManagement/src/java/com/pkg/dao/SystemUserDao.java</file>
             <file>file:/C:/Users/ravindu_c/Documents/NetBeansProjects/StudentManagement/web/index.jsp</file>
-            <file>file:/C:/Users/ravindu_c/Documents/NetBeansProjects/StudentManagement/web/studentPages/studentHome.jsp</file>
+            <file>file:/C:/Users/ravindu_c/Documents/NetBeansProjects/StudentManagement/src/java/users.xml</file>
             <file>file:/C:/Users/ravindu_c/Documents/NetBeansProjects/StudentManagement/src/java/com/pkg/services/SystemUserService.java</file>
             <file>file:/C:/Users/ravindu_c/Documents/NetBeansProjects/StudentManagement/src/java/com/pkg/daoImpl/SystemUserDaoImpl.java</file>
             <file>file:/C:/Users/ravindu_c/Documents/NetBeansProjects/StudentManagement/src/java/com/pkg/actions/SystemUserActions.java</file>
+            <file>file:/C:/Users/ravindu_c/Documents/NetBeansProjects/StudentManagement/web/adminPages/students/editStudents.jsp</file>
         </group>
     </open-files>
 </project-private>

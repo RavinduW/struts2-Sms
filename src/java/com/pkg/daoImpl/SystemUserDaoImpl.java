@@ -234,4 +234,92 @@ public class SystemUserDaoImpl implements SystemUserDao {
        return students;
     }
     
+    public boolean updateStudent(String username,SystemUser student){
+        query = "UPDATE system_users SET username=?,firstName=?,lastName=?,email=? WHERE username=?";
+        
+        try{
+            currentConnection = ConnectionManager.getConnection();
+            ps = currentConnection.prepareStatement(query);
+            
+            ps.setString(1, student.getUsername());
+            ps.setString(2, student.getFirstName());
+            ps.setString(3, student.getLastName());
+            ps.setString(4, student.getEmail());
+            ps.setString(5, student.getUsername());
+            
+            ps.executeUpdate();
+            
+            success = true;
+            
+        }catch(Exception e){
+            System.out.println(e);
+            success = false;
+        }finally{
+            if(currentConnection != null){
+                try{
+                    currentConnection.close();
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+            }
+            
+            if(ps != null){
+                try{
+                    ps.close();
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+            }
+            
+            if(rs != null){
+                try{
+                    rs.close();
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+            }
+        }
+        return success;
+    }
+    
+    public void deleteStudent(String username){
+        query = "DELETE FROM system_users WHERE username=?";
+        
+        try{
+            
+            currentConnection = ConnectionManager.getConnection();
+            ps = currentConnection.prepareStatement(query);
+            ps.setString(1,username);
+            
+            ps.executeUpdate(); 
+            
+        }catch(Exception e){
+            System.out.println(e);
+        }finally{
+            if(currentConnection != null){
+                try{
+                    currentConnection.close();
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+            }
+            
+            if(ps != null){
+                try{
+                    ps.close();
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+            }
+            
+            if(rs != null){
+                try{
+                    rs.close();
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+            }            
+        }
+    }
+    
 }

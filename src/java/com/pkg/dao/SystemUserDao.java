@@ -26,4 +26,9 @@ public interface SystemUserDao {
     //method to get students list
     public List<SystemUser> getStudents();
     
+    //method to update particular student
+    public boolean updateStudent(String username, SystemUser student);
+    
+    //method to delete particular student
+    public void deleteStudent(String username);
 }

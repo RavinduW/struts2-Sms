@@ -141,14 +141,31 @@ public class SystemUserService {
     }
     
     //retrieve partcular student data
-    public List<SystemUser> getStudent(String username){
+    public SystemUser getStudent(String username){
         
         List<SystemUser> list = new ArrayList<SystemUser>();
-  
+        list = sud.getSystemUserDetails(username);
+        
         if(list.get(0).getRole_id()== rd.getRole("student")){
-            list = sud.getSystemUserDetails(username);
+            return list.get(0);
         }
-        return list;
+       
+        return null;   
+    }
+    
+    //update particular student data
+    public boolean updateStudent(String username, SystemUser student){
+        boolean result = false;
+        
+        if(sud.updateStudent(username, student)){
+            result = true;
+        }
+        
+        return result;
+    }
+    
+    public void deleteStudent(String username){
+        sud.deleteStudent(username);
     }
     
 }

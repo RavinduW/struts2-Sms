@@ -6,6 +6,7 @@
 package com.pkg.actions;
 
 import static com.opensymphony.xwork2.Action.ERROR;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.pkg.models.SystemUser;
@@ -14,6 +15,8 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import org.apache.struts2.ServletActionContext;
 
 /**
  *
@@ -24,12 +27,12 @@ public class SystemUserActions extends ActionSupport implements ModelDriven<Syst
     private SystemUserService sus = new SystemUserService();
     private SystemUser systemuser = new SystemUser();
     private List<SystemUser> studentList;
+    private List<SystemUser> student;
 
     public String adminHome(){
         return SUCCESS;
     }
-    
-    
+
     public String viewStudents(){
         studentList = sus.getStudentsList();
         return SUCCESS;
@@ -44,11 +47,25 @@ public class SystemUserActions extends ActionSupport implements ModelDriven<Syst
         }
     }
     
-    public String editStudents(){
+    public String editStudents(){ //get the editStudents.jsp
+        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get( ServletActionContext.HTTP_REQUEST);
+        //student = sus.getStudent(request.getParameter("username"));
+        System.out.println(request.getParameter("username"));
+        systemuser = sus.getStudent(request.getParameter("username"));
         return SUCCESS;
     }
     
+    public String updateStudents(){ //update student de6tails
+        if(sus.updateStudent(systemuser.getUsername(), systemuser)){
+            return SUCCESS;
+        }else{
+            return ERROR;
+        }
+    }
+    
     public String deleteStudents(){
+        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get( ServletActionContext.HTTP_REQUEST);
+        sus.deleteStudent(request.getParameter("username"));
         return SUCCESS;
     }
 

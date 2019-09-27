@@ -18,7 +18,7 @@
         <a href="<s:url action="viewStudents"/>">View Students</a> 
         <br/>
         <h2>Add new student</h2>
-        <s:form action="save"> 
+        <s:form action="save" method="post"> 
             <s:textfield name="username" label="UserName"></s:textfield>  
             <s:textfield name="firstName" label="First Name"></s:textfield>  
             <s:textfield name="lastName" label="Last Name"></s:textfield>

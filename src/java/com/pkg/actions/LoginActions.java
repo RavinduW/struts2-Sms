@@ -59,7 +59,7 @@ public class LoginActions extends ActionSupport implements ModelDriven<SystemUse
         HttpSession newsession = ServletActionContext.getRequest().getSession();
         
         newsession.setAttribute("userId", systemuser.getUsername());
-        newsession.setMaxInactiveInterval(30);
+        newsession.setMaxInactiveInterval(120);
         
         return newsession;
     }
