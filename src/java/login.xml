@@ -8,9 +8,9 @@
              
         <action name="log*" method="log{1}" class="com.pkg.actions.LoginActions">
             <result name="admin" type="redirect">adminHome.action</result><!-- here used POST/REDIRECT/GET design pattern(PRG)-->
+            <result name="teacher" type="redirect">viewStudents.action</result>
             <result name="student">studentPages/studentHome.jsp</result>
-            <result name="superAdmin">superAdminPages/superAdminHome.jsp</result>
-            <result name="teacher">teacherPages/teacherHome.jsp</result>
+            <result name="superAdmin">superAdminPages/superAdminHome.jsp</result> 
             <result name="404">/error.jsp</result>
             <result name="success">/adminPages/adminHome.jsp</result>
             <result name="loggedout">/index.jsp</result>

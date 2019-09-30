@@ -25,6 +25,7 @@
         <!-- global results -->
         <global-results>
             <result name="index">/index.jsp</result>
+            <result name="unauthorized">/401.jsp</result>
         </global-results>
          
     </package>

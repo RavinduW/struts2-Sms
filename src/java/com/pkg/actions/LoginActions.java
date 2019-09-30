@@ -27,7 +27,7 @@ public class LoginActions extends ActionSupport implements ModelDriven<SystemUse
     
     private SystemUser systemuser = new SystemUser();
     private SystemUserService sus = new SystemUserService();
-    private List<SystemUser> userDetails = new ArrayList<SystemUser>();
+    //private List<SystemUser> userDetails = new ArrayList<SystemUser>();
     HttpSession session;
     
     @Override
@@ -50,15 +50,13 @@ public class LoginActions extends ActionSupport implements ModelDriven<SystemUse
         this.systemuser = systemuser;
     }
      
-    public String logAdmin(){
-        return SUCCESS;
-    }
     
     //method to make sessions when login
     public HttpSession makeSession(){
         HttpSession newsession = ServletActionContext.getRequest().getSession();
         
         newsession.setAttribute("userId", systemuser.getUsername());
+        newsession.setAttribute("user_role",sus.getSysUser(systemuser.getUsername()).getRole_id() );
         newsession.setMaxInactiveInterval(120);
         
         return newsession;
@@ -107,19 +105,5 @@ public class LoginActions extends ActionSupport implements ModelDriven<SystemUse
         ServletActionContext.getRequest().getSession().invalidate();
         return "loggedout";
     }
-    
-    /**
-     * @return the userDetails
-     */
-    public List<SystemUser> getUserDetails() {
-        return userDetails;
-    }
-
-    /**
-     * @param userDetails the userDetails to set
-     */
-    public void setUserDetails(List<SystemUser> userDetails) {
-        this.userDetails = userDetails;
-    }
-    
+       
 }

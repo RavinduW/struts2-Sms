@@ -168,4 +168,13 @@ public class SystemUserService {
         sud.deleteStudent(username);
     }
     
+        //retrieve partcular student data
+    public SystemUser getSysUser(String username){
+        
+        List<SystemUser> list = new ArrayList<SystemUser>();
+        list = sud.getSystemUserDetails(username);
+        
+            return list.get(0);  
+    }
+    
 }

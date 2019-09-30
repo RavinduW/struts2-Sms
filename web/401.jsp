@@ -1,6 +1,6 @@
 <%-- 
-    Document   : teacherHome
-    Created on : Sep 26, 2019, 9:22:10 AM
+    Document   : error
+    Created on : Sep 20, 2019, 12:51:57 PM
     Author     : ravindu_c
 --%>
 
@@ -12,9 +12,7 @@
         <title>Student Management System</title>
     </head>
     <body>
-        <h1>Teacher</h1>
-        
-        
-        
+        <h1>401</h1>
+        <h2>Unauthorized access !</h2>
     </body>
 </html>

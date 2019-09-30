@@ -12,7 +12,6 @@
         <title>Student Management System</title>
     </head>
     <body>
-        <h1>404</h1>
-        <h2>Page Not Found !</h2>
+        <h1>ERROR !</h1>
     </body>
 </html>

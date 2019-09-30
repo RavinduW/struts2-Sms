@@ -11,6 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Student Management System</title>
+
     </head>
     <body>
         <h1>Students</h1>
@@ -28,5 +29,6 @@
         </s:form>
         
         <a href="<s:url action="logout"/>">LogOut</a>
+
     </body>
 </html>

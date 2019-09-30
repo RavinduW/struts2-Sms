@@ -13,6 +13,7 @@
         <title>Student Management System</title>
     </head>
     <body>
+       
         <h1>Welcome to the Student Management System !</h1>
         <br/>
         <h2>Sign In</h2>
@@ -23,5 +24,6 @@
             <s:submit value="Login"></s:submit>  
         </s:form> 
         <br/>
+
     </body>
 </html>
